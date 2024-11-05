@@ -1,0 +1,98 @@
+   
+        body{
+            background-image:url('../images/star_blink.gif');
+            background-position: center;
+            background-size: cover;
+            color: white;
+        }
+        header {
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-align: center;
+        }
+        section {
+            color:white;
+            text-align: center;
+            display: flex;
+        }
+        h1 {
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            text-align: center;
+
+        }
+        h2 {
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color:white;
+            text-align: center;
+        }
+        h3 {
+            font-family:'Courier New', Courier, monospace;
+            color: white;
+            text-align: center;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        li {
+            display: inline-block;
+            margin: 20px;
+        }
+        p {
+            font-family:'Courier New', Courier, monospace;
+            color: white;
+            text-align: center;
+        }
+        footer {
+            color: white;
+            text-align: center;
+        }
+        div {
+            background: black;
+            display: inline-block;
+            width: 100px;
+            margin: auto;    
+        }
+        #tumblr {
+            max-width: 50px;
+            max-height: 50px;
+        }
+        #discord {
+            max-width: 50px;
+            max-height: 50px;
+        }
+        #tiktok {
+            max-width: 50px;
+            max-height: 50px;
+        }
+        #github {
+            max-width: 50px;
+            max-height: 50px;
+        }
+        #bluesky {
+            max-width: 50px;
+            max-height: 50px;
+        }
+        button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        /* unused style*/
+        .column {
+            flex: 33.33%;
+            padding: 5px;
+        }
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        #copyright {
+            float: left;
+            padding-left: 10px;
+            padding-top: 10px;
+            text-align: center;
+            bottom: 0px;
+            width: 100%;
+        }
