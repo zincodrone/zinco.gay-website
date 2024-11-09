@@ -17,6 +17,7 @@
         h1 {
             font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             text-align: center;
+            font-size: 45px;
 
         }
         h2 {
@@ -53,25 +54,38 @@
             width: 100px;
             margin: auto;    
         }
+        #zinco  {
+            font-size: 100px;
+        }
         #tumblr {
             max-width: 50px;
             max-height: 50px;
         }
         #discord {
-            max-width: 50px;
+            max-width: 50;
             max-height: 50px;
+            
         }
         #tiktok {
-            max-width: 50px;
-            max-height: 50px;
+            max-width: 400px;
+            max-height: 200px;
+            position: absolute;
+            right: 27em;
+            top: 6.25em;
         }
         #github {
-            max-width: 50px;
-            max-height: 50px;
+            max-width: 400px;
+            max-height: 100px;
+            position: absolute;
+            right: 27em;
+            top: 13em;
         }
         #bluesky {
-            max-width: 50px;
-            max-height: 50px;
+            max-width: 400px;
+            max-height: 200px;
+            position: absolute;
+            right: 27em;
+            top: 19.75em;
         }
         button {
             background-color: transparent;
