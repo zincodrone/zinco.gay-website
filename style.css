@@ -69,23 +69,20 @@
         #tiktok {
             max-width: 400px;
             max-height: 200px;
-            position: absolute;
-            right: 27em;
-            top: 6.25em;
+            display: auto;
+            align-items: center;
         }
         #github {
             max-width: 400px;
-            max-height: 100px;
-            position: absolute;
-            right: 27em;
-            top: 13em;
+            max-height: 200px;
+            display: auto;
+            align-items: center;
         }
         #bluesky {
             max-width: 400px;
             max-height: 200px;
-            position: absolute;
-            right: 27em;
-            top: 19.75em;
+            display: auto;
+            align-items: center;
         }
         button {
             background-color: transparent;
