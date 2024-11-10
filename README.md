@@ -6,7 +6,7 @@ This is my first attempt to create my own website. Let's see how this goes.
 ## TBD
 ### - Blog ❓
 ####     For thought pieces, introspection, and other things that are best written out.
-### - Biography ❓
+### - Biography 🟨
 ####     Telling new visitors to my website who I am, what I do, and how to contact me.
 ### - Cool looking layout ❓    
 ####     Layout is unlikely to be in anyway cool looking as this is just a website to replace my linktree as of right now. I need inspiration anyway to design something cool looking.
