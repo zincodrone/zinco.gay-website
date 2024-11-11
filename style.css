@@ -28,14 +28,13 @@
             max-height: 200px;
         }
         .cotainer2 {
+            flex-wrap: wrap;
             display: flex;
             grid-template-rows: 100px 100px 10px;
             grid-template-columns: auto;
             margin: 0;
             padding: 0;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+            align-content: center;
         }
         .item-1 {
             grid-row: span 1;
@@ -55,4 +54,32 @@
             left: 0; 
             width: 100%; 
             text-align: center;
+        }
+        @media (max-width: 459px) {
+            #tiktok {
+                max-width: 250px;
+                max-height: 100px;
+            }
+            #github {
+                max-width: 250px;
+                max-height: 100px;
+            }
+            #bluesky {
+                max-width: 250px;
+                max-height: 100px;
+            }
+        }
+        @media (max-width: 320px) {
+            #tiktok {
+                max-width: 200px;
+                max-height: 75px;
+            }
+            #github {
+                max-width: 200px;
+                max-height: 75px;
+            }
+            #bluesky {
+                max-width: 200px;
+                max-height: 75px;
+            }
         }
