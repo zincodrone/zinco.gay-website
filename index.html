@@ -1,42 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZINCO</title>
-    <link rel="icon" href="../images/favicon.ico">
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <main>
+        <h1 class="site-title">ZINCO</h1>
+        <nav class="site-nav" aria-label="Main navigation">
+            <a href="index.html" aria-current="page">Home</a>
+            <a href="blog/index.html">Blog</a>
+            <a href="socials.html">Socials</a>
+        </nav>
 
-    <!--Title Text-->
-<h1>
-    <id=zinco>ZINCO</id>
-</h1>
-    <!--Social Links-->
-<h3>
-    <div class="container2">
-        <div class="item item-1">
-            <a href ="https://www.tiktok.com/@zincodron3">
-            <img id="tiktok" src="../images/Social Media Link_TikTok.png">
-            </a>
-        </div>
-        <div class="item item-2">
-            <a href = https://www.github.com/zincodrone>
-            <img id="github" src="../images/Social Media Link_Github.png">
-            </a>
-        </div>
-        <div class="item item-3">
-            <a href ="https://bsky.app/profile/zinco.gay">
-            <img id="bluesky" src="../images/Social Media Link_Bluesky.png">
-            </a>
-        </div>
-    </div>
-</h3>
-    <!--Footer-->
-<footer>
-    <p id=footer>🖤</p>	
-</footer>
+        <section class="bio" aria-labelledby="bio-heading">
+            <h2 id="bio-heading">
+                Greetings, I'm <span class="bio-name">ZINCO <span class="bio-pronouns">(he/they)</span></span>
+                and welcome to my website.
+            </h2>
+            <p>
+                Find me on my <a href="socials.html">socials</a>, or visit my <a href="blog/index.html">blog</a>
+                for thoughts and updates. There is more to come.
+            </p>
+        </section>
 
+
+    </main>
+
+    <footer class="site-footer">
+        <a class="site-version" href="https://github.com/zincodrone/zinco.gay-website">v1.0.1</a>
+        <p class="footer-heart">🖤</p>
+    </footer>
 </body>
 </html>

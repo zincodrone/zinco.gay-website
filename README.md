@@ -1,23 +1,44 @@
 This is my first attempt to create my own website. Let's see how this goes.
 
+# To-Do List
 
-# **To-Do List**
+**Legend:** ✅ Completed · 🟨 Planned · \[❓\] Undecided
 
-## TBD
-### - Blog ❓
-####     For thought pieces, introspection, and other things that are best written out.
-### - Biography 🟨
-####     Telling new visitors to my website who I am, what I do, and how to contact me.
-### - Cool looking layout ❓    
-####     Layout is unlikely to be in anyway cool looking as this is just a website to replace my linktree as of right now. I need inspiration anyway to design something cool looking.
-### - Activity Log ❓
-####         Place to log activities in my daily life, what I've been up to, and maybe linking to my blog(who knows?).
+- ✅ **Blog** — For thought pieces, introspection, and other things that are best written out.
+- ✅ **Biography** — Telling new visitors to my website who I am, what I do, and how to contact me.
 
-## - October 2024
-###     Add favicon ✅
-###     Added proper social media lables ✅
+- \[❓\] **Cool looking layout** — Layout is unlikely to be in any way cool looking as this started as a website to replace my Linktree. I need inspiration anyway to design something cool looking.
 
-## - May 2024
-###     Merge Socials and Home Page ✅
-###     Disable Socials Page ✅
-###     Disable and remove links to other html pages. ✅
+- \[❓\] Activity Log — Place to log activities in my daily life, what I've been up to, and maybe linking to my blog (who knows?).
+
+# Changelog
+
+Versions use `major.minor.patch`: major for substantial redesigns or changes that break existing behavior, minor for new features, and patch for fixes or small updates. October 2026 marks the site's first major release, `1.0.0`.
+
+## 1.0.1 — October 2026
+
+- Added the current version to the footer on every page.
+- Aligned the version on the left and the heart in the center of the footer, with the version linking to the GitHub repository.
+- Kept the footer at the bottom of short pages.
+
+## 1.0.0 — October 2026
+
+- Added a blog section with the first post, **Welcome!**
+- Updated the first blog post's body and preview text.
+- Added matching Home, Blog, and Socials navigation.
+- Moved social links to their own page.
+- Added Discord, Twitter/X, YouTube, and Twitch profile links.
+- Enlarged the TikTok logo and aligned all social button labels.
+- Arranged social links in two columns, with the final link centered at the bottom.
+- Updated the homepage biography to link to the blog and socials.
+
+## 0.2 — October 2024
+
+- Add favicon ✅
+- Added proper social media labels ✅
+
+## 0.1 — May 2024
+
+- Merge Socials and Home Page ✅
+- Disable Socials Page ✅
+- Disable and remove links to other HTML pages ✅

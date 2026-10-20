@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="100" viewBox="0 0 500 100">
+  <rect x="2.5" y="2.5" width="495" height="95" rx="10" fill="black" stroke="white" stroke-width="5"/>
+  <svg x="30" y="15" width="70" height="70" viewBox="0 0 24 24">
+    <path fill="white" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.64 7.584H.47l8.6-9.835L0 1.154h7.594l5.243 6.932 6.064-6.933Zm-1.29 19.49h2.039L6.487 3.24H4.3l13.31 17.403Z"/>
+  </svg>
+  <text x="175" y="65" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700">Twitter / X</text>
+</svg>
