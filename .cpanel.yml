@@ -1,0 +1,8 @@
+---
+deployment:
+  tasks:
+    # Change this path if zinco.gay uses a different document root in cPanel.
+    - 'export DEPLOYPATH="$HOME/public_html"'
+    - '/usr/bin/test -d "$DEPLOYPATH"'
+    - '/bin/cp index.html socials.html style.css "$DEPLOYPATH/"'
+    - '/bin/cp -R blog images "$DEPLOYPATH/"'
