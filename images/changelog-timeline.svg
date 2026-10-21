@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3100" height="350" viewBox="0 0 3100 350" role="img" aria-labelledby="title description"><title id="title">ZINCO release timeline</title><desc id="description">Ten releases from 0.1.0 in May 2024 to 1.2.4 on October 21, 2026, connected from left to right. Times are in America/Chicago; spacing is not to scale.</desc><rect width="3100" height="350" rx="20" fill="#000"/><g font-family="Arial, Helvetica, sans-serif" fill="#fff"><text x="30" y="42" font-size="26" font-weight="700">ZINCO · RELEASE TIMELINE</text><path d="M170 112 H2930" stroke="#fff" stroke-width="3"/>
+<circle cx="170" cy="112" r="8" fill="#fff"/><path d="M170 120 V146" stroke="#fff" stroke-width="2"/><rect x="30" y="146" width="280" height="145" rx="14" fill="#000" stroke="#fff" stroke-width="2"/>
+<text x="170" y="177" text-anchor="middle" font-size="24" font-weight="700">0.1.0</text>
+<text x="170" y="207" text-anchor="middle" font-size="17" font-weight="400">May 2024</text>
+<text x="170" y="230" text-anchor="middle" font-size="15" font-weight="400"></text>
+<text x="170" y="264" text-anchor="middle" font-size="16" font-weight="400">Home and socials combined</text>
+<circle cx="475" cy="112" r="8" fill="#fff"/><path d="M475 120 V146" stroke="#fff" stroke-width="2"/><rect x="335" y="146" width="280" height="145" rx="14" fill="#000" stroke="#fff" stroke-width="2"/>
+<text x="475" y="177" text-anchor="middle" font-size="24" font-weight="700">0.1.1</text>
+<text x="475" y="207" text-anchor="middle" font-size="17" font-weight="400">October 2024</text>
+<text x="475" y="230" text-anchor="middle" font-size="15" font-weight="400"></text>
+<text x="475" y="264" text-anchor="middle" font-size="16" font-weight="400">Favicon and social labels</text>
+<circle cx="780" cy="112" r="8" fill="#fff"/><path d="M780 120 V146" stroke="#fff" stroke-width="2"/><rect x="640" y="146" width="280" height="145" rx="14" fill="#000" stroke="#fff" stroke-width="2"/>
+<text x="780" y="177" text-anchor="middle" font-size="24" font-weight="700">1.0.0</text>
+<text x="780" y="207" text-anchor="middle" font-size="17" font-weight="400">October 20, 2026</text>
+<text x="780" y="230" text-anchor="middle" font-size="15" font-weight="400">5:50 PM</text>
+<text x="780" y="264" text-anchor="middle" font-size="16" font-weight="400">Blog and Socials page</text>
+<circle cx="1085" cy="112" r="8" fill="#fff"/><path d="M1085 120 V146" stroke="#fff" stroke-width="2"/><rect x="945" y="146" width="280" height="145" rx="14" fill="#000" stroke="#fff" stroke-width="2"/>
+<text x="1085" y="177" text-anchor="middle" font-size="24" font-weight="700">1.0.1</text>
+<text x="1085" y="207" text-anchor="middle" font-size="17" font-weight="400">October 20, 2026</text>
+<text x="1085" y="230" text-anchor="middle" font-size="15" font-weight="400">6:06 PM</text>
+<text x="1085" y="264" text-anchor="middle" font-size="16" font-weight="400">Linked version footer</text>
+<circle cx="1390" cy="112" r="8" fill="#fff"/><path d="M1390 120 V146" stroke="#fff" stroke-width="2"/><rect x="1250" y="146" width="280" height="145" rx="14" fill="#000" stroke="#fff" stroke-width="2"/>
+<text x="1390" y="177" text-anchor="middle" font-size="24" font-weight="700">1.1.0</text>
+<text x="1390" y="207" text-anchor="middle" font-size="17" font-weight="400">October 21, 2026</text>
+<text x="1390" y="230" text-anchor="middle" font-size="15" font-weight="400">5:01 PM</text>
+<text x="1390" y="264" text-anchor="middle" font-size="16" font-weight="400">Instagram and clean URLs</text>
+<circle cx="1695" cy="112" r="8" fill="#fff"/><path d="M1695 120 V146" stroke="#fff" stroke-width="2"/><rect x="1555" y="146" width="280" height="145" rx="14" fill="#000" stroke="#fff" stroke-width="2"/>
+<text x="1695" y="177" text-anchor="middle" font-size="24" font-weight="700">1.2.0</text>
+<text x="1695" y="207" text-anchor="middle" font-size="17" font-weight="400">October 21, 2026</text>
+<text x="1695" y="230" text-anchor="middle" font-size="15" font-weight="400">5:06 PM</text>
+<text x="1695" y="264" text-anchor="middle" font-size="16" font-weight="400">Tab choices and redirects</text>
+<circle cx="2000" cy="112" r="8" fill="#fff"/><path d="M2000 120 V146" stroke="#fff" stroke-width="2"/><rect x="1860" y="146" width="280" height="145" rx="14" fill="#000" stroke="#fff" stroke-width="2"/>
+<text x="2000" y="177" text-anchor="middle" font-size="24" font-weight="700">1.2.1</text>
+<text x="2000" y="207" text-anchor="middle" font-size="17" font-weight="400">October 21, 2026</text>
+<text x="2000" y="230" text-anchor="middle" font-size="15" font-weight="400">5:10 PM</text>
+<text x="2000" y="264" text-anchor="middle" font-size="16" font-weight="400">Choices below social links</text>
+<circle cx="2305" cy="112" r="8" fill="#fff"/><path d="M2305 120 V146" stroke="#fff" stroke-width="2"/><rect x="2165" y="146" width="280" height="145" rx="14" fill="#000" stroke="#fff" stroke-width="2"/>
+<text x="2305" y="177" text-anchor="middle" font-size="24" font-weight="700">1.2.2</text>
+<text x="2305" y="207" text-anchor="middle" font-size="17" font-weight="400">October 21, 2026</text>
+<text x="2305" y="230" text-anchor="middle" font-size="15" font-weight="400">5:13 PM</text>
+<text x="2305" y="264" text-anchor="middle" font-size="16" font-weight="400">Slide animation and cache fixes</text>
+<circle cx="2610" cy="112" r="8" fill="#fff"/><path d="M2610 120 V146" stroke="#fff" stroke-width="2"/><rect x="2470" y="146" width="280" height="145" rx="14" fill="#000" stroke="#fff" stroke-width="2"/>
+<text x="2610" y="177" text-anchor="middle" font-size="24" font-weight="700">1.2.3</text>
+<text x="2610" y="207" text-anchor="middle" font-size="17" font-weight="400">October 21, 2026</text>
+<text x="2610" y="230" text-anchor="middle" font-size="15" font-weight="400">5:15 PM</text>
+<text x="2610" y="264" text-anchor="middle" font-size="16" font-weight="400">Live redirect countdown</text>
+<circle cx="2915" cy="112" r="8" fill="#fff"/><path d="M2915 120 V146" stroke="#fff" stroke-width="2"/><rect x="2775" y="146" width="280" height="145" rx="14" fill="#000" stroke="#fff" stroke-width="2"/>
+<text x="2915" y="177" text-anchor="middle" font-size="24" font-weight="700">1.2.4</text>
+<text x="2915" y="207" text-anchor="middle" font-size="17" font-weight="400">October 21, 2026</text>
+<text x="2915" y="230" text-anchor="middle" font-size="15" font-weight="400">5:17 PM</text>
+<text x="2915" y="264" text-anchor="middle" font-size="16" font-weight="400">Back/Forward choices reset</text>
+<text x="30" y="326" font-size="15" fill="#ccc">Commit times · America/Chicago · 2024 dates from original changelog · Spacing not to scale</text></g></svg>

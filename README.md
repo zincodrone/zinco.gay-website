@@ -19,22 +19,7 @@ Versions use `major.minor.patch`: major for substantial redesigns or changes tha
 
 Follow the line from the earliest release to the latest. Times are in America/Chicago and reflect when each version was committed, not when it was deployed to the live website. The 2024 entries retain the months recorded in the original changelog; exact release days were not recorded there. Spacing between releases is not to scale.
 
-```mermaid
-flowchart LR
-    v010["0.1.0 · May 2024<br/>Combine home and social pages"]
-    v011["0.1.1 · October 2024<br/>Favicon and social labels"]
-    v100["1.0.0 · October 20, 2026 · 5:50 PM<br/>Blog, Socials page, and navigation"]
-    v101["1.0.1 · October 20, 2026 · 6:06 PM<br/>Linked version footer"]
-    v110["1.1.0 · October 21, 2026 · 5:01 PM<br/>Instagram and clean URLs"]
-    v120["1.2.0 · October 21, 2026 · 5:06 PM<br/>Tab choices and redirect page"]
-    v121["1.2.1 · October 21, 2026 · 5:10 PM<br/>Choices panel below social links"]
-    v122["1.2.2 · October 21, 2026 · 5:13 PM<br/>Slide animation and cache fixes"]
-    v123["1.2.3 · October 21, 2026 · 5:15 PM<br/>Live redirect countdown"]
-    v124["1.2.4 · October 21, 2026 · 5:17 PM<br/>Reset choices on Back/Forward"]
-    v010 --> v011 --> v100 --> v101 --> v110 --> v120 --> v121 --> v122 --> v123 --> v124
-    classDef release fill:#000,color:#fff,stroke:#fff
-    class v010,v011,v100,v101,v110,v120,v121,v122,v123,v124 release
-```
+![Horizontal release timeline from version 0.1.0 through 1.2.4](images/changelog-timeline.svg)
 
 ## 1.2.4 — October 2026
 
