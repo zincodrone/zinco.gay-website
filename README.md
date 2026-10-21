@@ -34,11 +34,11 @@ Versions use `major.minor.patch`: major for substantial redesigns or changes tha
 
 ## 0.1.1 — October 2024
 
-- Add favicon ✅
-- Added proper social media labels ✅
+- Add favicon
+- Added proper social media labels
 
 ## 0.1.0 — May 2024
 
-- Merge Socials and Home Page ✅
-- Disable Socials Page ✅
-- Disable and remove links to other HTML pages ✅
+- Merge Socials and Home Page
+- Disable Socials Page
+- Disable and remove links to other HTML pages
