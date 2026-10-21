@@ -19,7 +19,15 @@ Versions use `major.minor.patch`: major for substantial redesigns or changes tha
 
 Follow the line from the earliest release to the latest. Times are in America/Chicago and reflect when each version was committed, not when it was deployed to the live website. The 2024 entries retain the months recorded in the original changelog; exact release days were not recorded there. Spacing between releases is not to scale.
 
-![Horizontal release timeline from version 0.1.0 through 1.2.4](images/changelog-timeline.svg)
+![Release timeline, part 1 of 5](images/changelog-timeline-1.png)
+
+![Release timeline, part 2 of 5](images/changelog-timeline-2.png)
+
+![Release timeline, part 3 of 5](images/changelog-timeline-3.png)
+
+![Release timeline, part 4 of 5](images/changelog-timeline-4.png)
+
+![Release timeline, part 5 of 5](images/changelog-timeline-5.png)
 
 ## 1.2.4 — October 2026
 
