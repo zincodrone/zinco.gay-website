@@ -15,6 +15,23 @@ This is my first attempt to create my own website. Let's see how this goes.
 
 Versions use `major.minor.patch`: major for substantial redesigns or changes that break existing behavior, minor for new features, and patch for fixes or small updates. October 2026 marks the site's first major release, `1.0.0`.
 
+## Release timeline
+
+Newest updates appear first. Times are in America/Chicago and reflect when each version was committed, not when it was deployed to the live website. The 2024 entries retain the months recorded in the original changelog; exact release days were not recorded there.
+
+| Version | Update date | Time | Changes |
+| --- | --- | --- | --- |
+| **1.2.4** | October 21, 2026 | 5:17 PM | Reset social choices on browser Back/Forward. |
+| **1.2.3** | October 21, 2026 | 5:15 PM | Show a live redirect countdown. |
+| **1.2.2** | October 21, 2026 | 5:13 PM | Fix slide-open animation and refresh cached assets. |
+| **1.2.1** | October 21, 2026 | 5:10 PM | Move social choices into a panel below the links. |
+| **1.2.0** | October 21, 2026 | 5:06 PM | Add tab choices and the redirect page. |
+| **1.1.0** | October 21, 2026 | 5:01 PM | Add Instagram and clean URLs. |
+| **1.0.1** | October 20, 2026 | 6:06 PM | Add the linked version footer. |
+| **1.0.0** | October 20, 2026 | 5:50 PM | Add the blog, Socials page, and matching navigation. |
+| **0.1.1** | October 2024 | Not recorded | Add the favicon and social labels. |
+| **0.1.0** | May 2024 | Not recorded | Combine the original home and social pages. |
+
 ## 1.2.4 — October 2026
 
 - Reset social-link choices when leaving or returning to the page, including browser Back/Forward navigation.
