@@ -1,0 +1,17 @@
+Options -MultiViews
+DirectoryIndex index.html
+RewriteEngine On
+
+# Redirect explicitly requested index files to their directory URL.
+RewriteCond %{THE_REQUEST} \s/+[^?\s]*index\.html(?:[?\s]) [NC]
+RewriteRule ^(.*/)?index\.html$ /$1 [R=301,L]
+
+# Preserve old links while making extensionless URLs canonical.
+RewriteCond %{THE_REQUEST} \s/+[^?\s]+\.html(?:[?\s]) [NC]
+RewriteRule ^(.+)\.html$ /$1 [R=301,L]
+
+# Serve existing HTML pages without changing the visible URL.
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]
