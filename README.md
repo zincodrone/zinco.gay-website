@@ -15,6 +15,13 @@ This is my first attempt to create my own website. Let's see how this goes.
 
 Versions use `major.minor.patch`: major for substantial redesigns or changes that break existing behavior, minor for new features, and patch for fixes or small updates. October 2026 marks the site's first major release, `1.0.0`.
 
+## 1.2.0 — October 2026
+
+- Added a social-link dialog offering the current tab, a new tab, or cancel.
+- Added a redirect page for current-tab choices, showing the destination with a five-second delay, Continue now, and Cancel.
+- Kept keyboard shortcuts and direct links working when JavaScript is unavailable.
+- Updated deployment to include the redirect page and social-link script.
+
 ## 1.1.0 — October 2026
 
 - Added Instagram to the Socials page with a matching button.
