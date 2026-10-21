@@ -17,20 +17,24 @@ Versions use `major.minor.patch`: major for substantial redesigns or changes tha
 
 ## Release timeline
 
-Newest updates appear first. Times are in America/Chicago and reflect when each version was committed, not when it was deployed to the live website. The 2024 entries retain the months recorded in the original changelog; exact release days were not recorded there.
+Follow the line from the earliest release to the latest. Times are in America/Chicago and reflect when each version was committed, not when it was deployed to the live website. The 2024 entries retain the months recorded in the original changelog; exact release days were not recorded there. Spacing between releases is not to scale.
 
-| Version | Update date | Time | Changes |
-| --- | --- | --- | --- |
-| **1.2.4** | October 21, 2026 | 5:17 PM | Reset social choices on browser Back/Forward. |
-| **1.2.3** | October 21, 2026 | 5:15 PM | Show a live redirect countdown. |
-| **1.2.2** | October 21, 2026 | 5:13 PM | Fix slide-open animation and refresh cached assets. |
-| **1.2.1** | October 21, 2026 | 5:10 PM | Move social choices into a panel below the links. |
-| **1.2.0** | October 21, 2026 | 5:06 PM | Add tab choices and the redirect page. |
-| **1.1.0** | October 21, 2026 | 5:01 PM | Add Instagram and clean URLs. |
-| **1.0.1** | October 20, 2026 | 6:06 PM | Add the linked version footer. |
-| **1.0.0** | October 20, 2026 | 5:50 PM | Add the blog, Socials page, and matching navigation. |
-| **0.1.1** | October 2024 | Not recorded | Add the favicon and social labels. |
-| **0.1.0** | May 2024 | Not recorded | Combine the original home and social pages. |
+```mermaid
+flowchart TB
+    v010["0.1.0 · May 2024<br/>Combine home and social pages"]
+    v011["0.1.1 · October 2024<br/>Favicon and social labels"]
+    v100["1.0.0 · October 20, 2026 · 5:50 PM<br/>Blog, Socials page, and navigation"]
+    v101["1.0.1 · October 20, 2026 · 6:06 PM<br/>Linked version footer"]
+    v110["1.1.0 · October 21, 2026 · 5:01 PM<br/>Instagram and clean URLs"]
+    v120["1.2.0 · October 21, 2026 · 5:06 PM<br/>Tab choices and redirect page"]
+    v121["1.2.1 · October 21, 2026 · 5:10 PM<br/>Choices panel below social links"]
+    v122["1.2.2 · October 21, 2026 · 5:13 PM<br/>Slide animation and cache fixes"]
+    v123["1.2.3 · October 21, 2026 · 5:15 PM<br/>Live redirect countdown"]
+    v124["1.2.4 · October 21, 2026 · 5:17 PM<br/>Reset choices on Back/Forward"]
+    v010 --> v011 --> v100 --> v101 --> v110 --> v120 --> v121 --> v122 --> v123 --> v124
+    classDef release fill:#000,color:#fff,stroke:#fff
+    class v010,v011,v100,v101,v110,v120,v121,v122,v123,v124 release
+```
 
 ## 1.2.4 — October 2026
 
