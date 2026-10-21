@@ -76,10 +76,26 @@ if (destination) {
         document.getElementById("redirect-url").textContent = profile[2];
         continueLink.href = profile[2];
         continueLink.hidden = false;
-        status.textContent = "Opening your profile destination in 5 seconds…";
-        const redirectTimer = window.setTimeout(() => window.location.replace(profile[2]), 5000);
-        document.getElementById("cancel-redirect").addEventListener("click", () => window.clearTimeout(redirectTimer));
-        window.addEventListener("pagehide", () => window.clearTimeout(redirectTimer), { once: true });
+        const redirectAt = Date.now() + 5000;
+        let lastSeconds;
+        function updateCountdown() {
+            const seconds = Math.max(0, Math.ceil((redirectAt - Date.now()) / 1000));
+            if (seconds === lastSeconds) return;
+            lastSeconds = seconds;
+            status.textContent = seconds > 0
+                ? `Opening your profile destination in ${seconds} ${seconds === 1 ? "second" : "seconds"}…`
+                : "Opening your profile destination now…";
+            if (seconds === 0) {
+                window.clearInterval(redirectTimer);
+                window.location.replace(profile[2]);
+            }
+        }
+        const redirectTimer = window.setInterval(updateCountdown, 250);
+        updateCountdown();
+        const stopCountdown = () => window.clearInterval(redirectTimer);
+        document.getElementById("cancel-redirect").addEventListener("click", stopCountdown);
+        continueLink.addEventListener("click", stopCountdown);
+        window.addEventListener("pagehide", stopCountdown, { once: true });
     } else {
         destination.textContent = "No social profile selected.";
         status.textContent = "Return to Socials to choose a profile.";
