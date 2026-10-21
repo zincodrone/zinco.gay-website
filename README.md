@@ -20,7 +20,7 @@ Versions use `major.minor.patch`: major for substantial redesigns or changes tha
 Follow the line from the earliest release to the latest. Times are in America/Chicago and reflect when each version was committed, not when it was deployed to the live website. The 2024 entries retain the months recorded in the original changelog; exact release days were not recorded there. Spacing between releases is not to scale.
 
 ```mermaid
-flowchart TB
+flowchart LR
     v010["0.1.0 · May 2024<br/>Combine home and social pages"]
     v011["0.1.1 · October 2024<br/>Favicon and social labels"]
     v100["1.0.0 · October 20, 2026 · 5:50 PM<br/>Blog, Socials page, and navigation"]
