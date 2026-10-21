@@ -206,6 +206,15 @@ a:focus-visible {
     margin: 0;
 }
 
+.choice-reveal {
+    display: flow-root;
+    overflow: hidden;
+}
+
+.choice-reveal[hidden] {
+    display: none;
+}
+
 .link-panel {
     box-sizing: border-box;
     width: calc(100% - 2rem);
@@ -218,24 +227,10 @@ a:focus-visible {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6;
-    animation: reveal-link-panel 250ms ease-out;
-}
-
-.link-panel[hidden] {
-    display: none;
 }
 
 .link-panel h2 {
     margin-top: 0;
-}
-
-@keyframes reveal-link-panel {
-    from { opacity: 0; transform: translateY(-0.75rem); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .link-panel { animation: none; }
 }
 
 .link-actions {

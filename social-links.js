@@ -16,7 +16,9 @@ const choice = document.getElementById("social-choice");
 if (choice) {
     let selectedProfile;
     let trigger;
+    let revealAnimation;
     function closeChoice() {
+        revealAnimation?.cancel();
         choice.hidden = true;
         trigger?.focus({ preventScroll: true });
     }
@@ -30,9 +32,22 @@ if (choice) {
             selectedProfile = profile;
             trigger = link;
             document.getElementById("choice-description").textContent = `Open ${profile[1]} in this tab or a new tab?`;
+            const wasHidden = choice.hidden;
             choice.hidden = false;
+            if (wasHidden && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                revealAnimation?.cancel();
+                revealAnimation = choice.animate(
+                    [{ height: "0px", opacity: 0 }, { height: `${choice.scrollHeight}px`, opacity: 1 }],
+                    { duration: 400, easing: "cubic-bezier(0.2, 0.8, 0.2, 1)" }
+                );
+                revealAnimation.addEventListener("finish", () => {
+                    choice.scrollIntoView({ behavior: "smooth", block: "nearest" });
+                }, { once: true });
+            }
             document.getElementById("choice-title").focus({ preventScroll: true });
-            choice.scrollIntoView({ behavior: "auto", block: "nearest" });
+            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                choice.scrollIntoView({ behavior: "auto", block: "nearest" });
+            }
         });
     });
     document.getElementById("open-current").addEventListener("click", () => {

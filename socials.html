@@ -6,8 +6,8 @@
     <meta name="description" content="Find ZINCO on Discord, TikTok, GitHub, Bluesky, X, YouTube, Twitch, and Instagram.">
     <title>Socials | ZINCO</title>
     <link rel="icon" href="images/favicon.ico">
-    <link rel="stylesheet" href="style.css">
-    <script src="social-links.js" defer></script>
+    <link rel="stylesheet" href="style.css?v=1.2.2">
+    <script src="social-links.js?v=1.2.2" defer></script>
 </head>
 <body>
     <main>
@@ -43,7 +43,8 @@
                 <img src="images/Social Media Link_Instagram.svg" alt="Instagram">
             </a>
         </nav>
-    <section class="link-panel" id="social-choice" aria-labelledby="choice-title" aria-describedby="choice-description" hidden>
+    <div class="choice-reveal" id="social-choice" hidden>
+    <section class="link-panel" aria-labelledby="choice-title" aria-describedby="choice-description">
         <h2 id="choice-title" tabindex="-1">Open social profile</h2>
         <p id="choice-description"></p>
         <div class="link-actions">
@@ -52,9 +53,10 @@
             <button type="button" id="cancel-choice">Cancel</button>
         </div>
     </section>
+    </div>
     </main>
     <footer class="site-footer">
-        <a class="site-version" href="https://github.com/zincodrone/zinco.gay-website">v1.2.1</a>
+        <a class="site-version" href="https://github.com/zincodrone/zinco.gay-website">v1.2.2</a>
         <p class="footer-heart">🖤</p>
     </footer>
 </body>

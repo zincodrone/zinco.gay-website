@@ -15,6 +15,12 @@ This is my first attempt to create my own website. Let's see how this goes.
 
 Versions use `major.minor.patch`: major for substantial redesigns or changes that break existing behavior, minor for new features, and patch for fixes or small updates. October 2026 marks the site's first major release, `1.0.0`.
 
+## 1.2.2 — October 2026
+
+- Replaced the brief fade with a full slide-open animation beneath the social links.
+- Added versioned stylesheet and script URLs so browsers request the current files after updates.
+- Preserved the black-and-white panel, cancellation, and reduced-motion support.
+
 ## 1.2.1 — October 2026
 
 - Moved social-link choices into a rounded panel below the social buttons so they no longer overlap.
