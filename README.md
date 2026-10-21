@@ -15,6 +15,14 @@ This is my first attempt to create my own website. Let's see how this goes.
 
 Versions use `major.minor.patch`: major for substantial redesigns or changes that break existing behavior, minor for new features, and patch for fixes or small updates. October 2026 marks the site's first major release, `1.0.0`.
 
+## 1.1.0 — October 2026
+
+- Added Instagram to the Socials page with a matching button.
+- Updated navigation to use clean URLs without `.html` extensions.
+- Added redirects from old `.html` addresses to their clean URLs.
+- Updated cPanel deployment to include the URL rewrite configuration.
+- Standardized the early changelog versions as `0.1.0` and `0.1.1` and removed their checkmarks.
+
 ## 1.0.1 — October 2026
 
 - Added the current version to the footer on every page.
