@@ -32,12 +32,12 @@ Versions use `major.minor.patch`: major for substantial redesigns or changes tha
 - Arranged social links in two columns, with the final link centered at the bottom.
 - Updated the homepage biography to link to the blog and socials.
 
-## 0.2 — October 2024
+## 0.1.1 — October 2024
 
 - Add favicon ✅
 - Added proper social media labels ✅
 
-## 0.1 — May 2024
+## 0.1.0 — May 2024
 
 - Merge Socials and Home Page ✅
 - Disable Socials Page ✅
