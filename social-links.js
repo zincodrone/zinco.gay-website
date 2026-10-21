@@ -13,9 +13,13 @@ const socialProfiles = [
 ];
 
 const choice = document.getElementById("social-choice");
-if (choice && typeof choice.showModal === "function") {
+if (choice) {
     let selectedProfile;
     let trigger;
+    function closeChoice() {
+        choice.hidden = true;
+        trigger?.focus({ preventScroll: true });
+    }
     document.querySelectorAll(".social-links a").forEach((link) => {
         link.addEventListener("click", (event) => {
             // Preserve browser shortcuts such as Ctrl-click and Cmd-click.
@@ -26,7 +30,9 @@ if (choice && typeof choice.showModal === "function") {
             selectedProfile = profile;
             trigger = link;
             document.getElementById("choice-description").textContent = `Open ${profile[1]} in this tab or a new tab?`;
-            choice.showModal();
+            choice.hidden = false;
+            document.getElementById("choice-title").focus({ preventScroll: true });
+            choice.scrollIntoView({ behavior: "auto", block: "nearest" });
         });
     });
     document.getElementById("open-current").addEventListener("click", () => {
@@ -34,10 +40,15 @@ if (choice && typeof choice.showModal === "function") {
     });
     document.getElementById("open-new").addEventListener("click", () => {
         window.open(selectedProfile[2], "_blank", "noopener,noreferrer");
-        choice.close();
+        closeChoice();
     });
-    document.getElementById("cancel-choice").addEventListener("click", () => choice.close());
-    choice.addEventListener("close", () => trigger?.focus());
+    document.getElementById("cancel-choice").addEventListener("click", closeChoice);
+    choice.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            event.preventDefault();
+            closeChoice();
+        }
+    });
 }
 
 const destination = document.getElementById("redirect-destination");
