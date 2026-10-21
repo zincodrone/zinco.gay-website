@@ -22,6 +22,15 @@ if (choice) {
         choice.hidden = true;
         trigger?.focus({ preventScroll: true });
     }
+    function resetChoice() {
+        revealAnimation?.cancel();
+        choice.hidden = true;
+        selectedProfile = undefined;
+        trigger = undefined;
+    }
+    // Back/Forward may restore the page's previous DOM from the browser cache.
+    window.addEventListener("pageshow", resetChoice);
+    window.addEventListener("pagehide", resetChoice);
     document.querySelectorAll(".social-links a").forEach((link) => {
         link.addEventListener("click", (event) => {
             // Preserve browser shortcuts such as Ctrl-click and Cmd-click.
@@ -51,9 +60,13 @@ if (choice) {
         });
     });
     document.getElementById("open-current").addEventListener("click", () => {
-        window.location.assign(`/redirect?social=${encodeURIComponent(selectedProfile[0])}`);
+        if (!selectedProfile) return;
+        const redirectUrl = `/redirect?social=${encodeURIComponent(selectedProfile[0])}`;
+        resetChoice();
+        window.location.assign(redirectUrl);
     });
     document.getElementById("open-new").addEventListener("click", () => {
+        if (!selectedProfile) return;
         window.open(selectedProfile[2], "_blank", "noopener,noreferrer");
         closeChoice();
     });

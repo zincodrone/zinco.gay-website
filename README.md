@@ -15,6 +15,11 @@ This is my first attempt to create my own website. Let's see how this goes.
 
 Versions use `major.minor.patch`: major for substantial redesigns or changes that break existing behavior, minor for new features, and patch for fixes or small updates. October 2026 marks the site's first major release, `1.0.0`.
 
+## 1.2.4 — October 2026
+
+- Reset social-link choices when leaving or returning to the page, including browser Back/Forward navigation.
+- Closed the choices before opening the current-tab redirect page.
+
 ## 1.2.3 — October 2026
 
 - Made the redirect countdown visibly decrease from five seconds until the profile opens.
