@@ -17,11 +17,11 @@ Pushes to `main` automatically update and deploy the website through the cPanel 
 
 ## Repository security
 
-GitHub Actions scans pushes and pull requests for exposed secrets with a pinned, checksum-verified Gitleaks release. Scanner findings redact secret values. Local environment files and private-key files are excluded from Git by `.gitignore`; real credentials belong in GitHub Actions secrets. These checks reduce accidental exposure but do not guarantee that every security issue will be detected.
+GitHub Actions scans the full fetched Git history on pushes, pull requests, and manual runs using [BetterLeaks v1.9.0](https://github.com/betterleaks/betterleaks/releases/tag/v1.9.0). The release archive is pinned and verified against its SHA-256 checksum before execution. Secret values are fully redacted, and live credential validation is explicitly disabled. The scan uses read-only repository permissions and does not retain checkout credentials. Local environment files and private-key files are excluded from Git by `.gitignore`; real credentials belong in GitHub Actions secrets. These checks reduce accidental exposure but do not guarantee that every security issue will be detected.
 
 # Changelog
 
-Current version: **1.3.0.1**.
+Current version: **1.3.0.2**.
 
 New releases use `major.minor.patch.security`: major for substantial redesigns or changes that break existing behavior, minor for new features, patch for ordinary fixes or small maintenance updates, and security for security updates and related cleanup. Increment the applicable number and reset every number to its right to zero. After `1.3.0.1`, another security update would be `1.3.0.2`, an ordinary patch would be `1.3.1.0`, a new feature would be `1.4.0.0`, and a major release would be `2.0.0.0`. When changes span categories, use the highest applicable component.
 
@@ -33,7 +33,14 @@ Every update must update this README and the website version together, including
 
 Follow the arrows from the earliest release to the latest, snaking across each row. Times are in America/Chicago and reflect when each version was committed, not when it was deployed to the live website. The 2024 entries retain the months recorded in the original changelog; exact release days were not recorded there. Spacing between releases is not to scale.
 
-![Snaking release timeline from version 0.1.0 through 1.3.0.1](images/changelog-timeline-snake.png)
+![Snaking release timeline from version 0.1.0 through 1.3.0.2](images/changelog-timeline-snake.png)
+
+## 1.3.0.2 — October 22, 2026 (security update)
+
+- Replaced Gitleaks with BetterLeaks v1.9.0 for automatic and manual secret scans.
+- Pinned BetterLeaks to its stable release and verified the downloaded archive against its SHA-256 checksum.
+- Preserved full-history scanning, complete secret redaction, read-only repository permissions, and disabled checkout credential persistence.
+- Explicitly disabled live credential validation so the scan does not test detected values against provider APIs.
 
 ## 1.3.0.1 — October 21, 2026 (security update)
 
