@@ -19,7 +19,16 @@ Versions use `major.minor.patch`: major for substantial redesigns or changes tha
 
 Follow the arrows from the earliest release to the latest, snaking across each row. Times are in America/Chicago and reflect when each version was committed, not when it was deployed to the live website. The 2024 entries retain the months recorded in the original changelog; exact release days were not recorded there. Spacing between releases is not to scale.
 
-![Snaking release timeline from version 0.1.0 through 1.2.4](images/changelog-timeline-snake.png)
+![Snaking release timeline from version 0.1.0 through 1.3.0](images/changelog-timeline-snake.png)
+
+## 1.3.0 — October 21, 2026
+
+- Added staggered entrance fades to Home, the blog listing, and individual blog posts.
+- Added paired row fades to social buttons, waiting for the button images to load before animating.
+- Limited entrance fades to the first visit to each page in the current tab session; clicking, refreshing, or returning does not replay completed fades.
+- Kept the footer version and heart visible without animation and respected reduced-motion preferences.
+- Added an immediate black background and preloaded the star GIF to reduce flashes during navigation and refreshes.
+- Fixed fade timing so both social buttons in each row appear together.
 
 ## 1.2.4 — October 2026
 

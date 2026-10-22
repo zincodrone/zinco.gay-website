@@ -1,10 +1,16 @@
 /* Page */
+html {
+    background-color: black;
+    color-scheme: dark;
+}
+
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     min-height: 100svh;
     margin: 0;
+    background-color: black;
     background-image: url("images/star_blink.gif");
     background-position: center;
     background-size: cover;
@@ -15,6 +21,55 @@ body {
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
     font-size: clamp(3rem, 12vw, 100px);
     text-align: center;
+}
+
+/* Page entrances exclude the footer and remain visible without animation. */
+@keyframes page-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html.social-row-pending .socials-page .social-links a {
+        opacity: 0;
+    }
+
+    html.page-entrance :is(.home-page, .blog-page, .socials-page) .site-title,
+    html.page-entrance :is(.home-page, .blog-page, .socials-page) .site-nav a,
+    html.social-row-entrance .socials-page .social-links a,
+    html.page-entrance .home-page .bio,
+    html.page-entrance .blog-page .blog-intro,
+    html.page-entrance .blog-page .post-card,
+    html.page-entrance .blog-page .post-body {
+        animation-name: page-fade-in;
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+        animation-fill-mode: backwards;
+    }
+
+    :is(.home-page, .blog-page, .socials-page) .site-nav a:nth-child(1) { animation-delay: 100ms; }
+    :is(.home-page, .blog-page, .socials-page) .site-nav a:nth-child(2) { animation-delay: 200ms; }
+    :is(.home-page, .blog-page, .socials-page) .site-nav a:nth-child(3) { animation-delay: 300ms; }
+    .home-page .bio,
+    .blog-page .blog-intro,
+    .blog-page .post-body { animation-delay: 400ms; }
+    .blog-page .post-card { animation-delay: 550ms; }
+
+    /* Both buttons in each two-column row share the same entrance timing. */
+    .socials-page .social-links a { animation-delay: 400ms; }
+    .socials-page .social-links a:nth-child(n+3) { animation-delay: 550ms; }
+    .socials-page .social-links a:nth-child(n+5) { animation-delay: 700ms; }
+    .socials-page .social-links a:nth-child(n+7) { animation-delay: 850ms; }
+
+    :is(.home-page, .blog-page, .socials-page) .site-nav a:focus,
+    .socials-page .social-links a:focus,
+    .home-page .bio:focus-within,
+    .blog-page .blog-intro:focus-within,
+    .blog-page .post-card:focus-within,
+    .blog-page .post-body:focus-within {
+        /* Keep focused content visible without cancelling/restarting its entrance. */
+        opacity: 1 !important;
+    }
 }
 
 /* Biography: change this variable to update only the bio font. */
