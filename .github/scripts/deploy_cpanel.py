@@ -7,7 +7,7 @@ import re
 import sys
 import time
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 
@@ -19,9 +19,13 @@ class NoRedirect(HTTPRedirectHandler):
 
 class CPanel:
     def __init__(self, host, username, token, root):
-        if not re.fullmatch(r"[A-Za-z0-9.-]+", host):
+        address = urlsplit(host if "://" in host else f"https://{host}")
+        hostname = address.hostname or ""
+        if (address.scheme != "https" or address.username or address.password
+                or address.port not in (None, 2083)
+                or not re.fullmatch(r"[A-Za-z0-9.-]+", hostname)):
             raise RuntimeError("Invalid cPanel hostname.")
-        self.base = f"https://{host}:2083/execute"
+        self.base = f"https://{hostname}:2083/execute"
         self.authorization = f"cpanel {username}:{token}"
         self.root = root
         self.opener = build_opener(NoRedirect())
@@ -157,5 +161,9 @@ if __name__ == "__main__":
             value = os.environ.get(name, "").strip()
             if value:
                 message = message.replace(value, "[redacted]")
+                if name == "CPANEL_HOST":
+                    hostname = urlsplit(value if "://" in value else f"https://{value}").hostname
+                    if hostname:
+                        message = message.replace(hostname, "[redacted]")
         print(f"Deployment failed: {message}", file=sys.stderr)
         sys.exit(1)
