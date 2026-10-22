@@ -21,13 +21,32 @@ GitHub Actions scans pushes and pull requests for exposed secrets with a pinned,
 
 # Changelog
 
-Versions use `major.minor.patch`: major for substantial redesigns or changes that break existing behavior, minor for new features, and patch for fixes or small updates. October 2026 marks the site's first major release, `1.0.0`.
+Current version: **1.3.0.1**.
+
+New releases use `major.minor.patch.security`: major for substantial redesigns or changes that break existing behavior, minor for new features, patch for ordinary fixes or small maintenance updates, and security for security updates and related cleanup. Increment the applicable number and reset every number to its right to zero. After `1.3.0.1`, another security update would be `1.3.0.2`, an ordinary patch would be `1.3.1.0`, a new feature would be `1.4.0.0`, and a major release would be `2.0.0.0`. When changes span categories, use the highest applicable component.
+
+Historical three-part versions keep their original labels and imply a security number of zero. October 2026 marks the site's first major release, `1.0.0`.
+
+Every update must update this README and the website version together, including all page footers, versioned stylesheet/script URLs, changelog entries, and the release timeline. These requirements are also recorded in [AGENTS.md](AGENTS.md) for future work.
 
 ## Release timeline
 
 Follow the arrows from the earliest release to the latest, snaking across each row. Times are in America/Chicago and reflect when each version was committed, not when it was deployed to the live website. The 2024 entries retain the months recorded in the original changelog; exact release days were not recorded there. Spacing between releases is not to scale.
 
-![Snaking release timeline from version 0.1.0 through 1.3.0](images/changelog-timeline-snake.png)
+![Snaking release timeline from version 0.1.0 through 1.3.0.1](images/changelog-timeline-snake.png)
+
+## 1.3.0.1 — October 21, 2026 (security update)
+
+Security and repository maintenance completed October 21, 2026. The four-part version designation and these release notes were added October 22, 2026.
+
+- Moved cPanel connection details into GitHub Actions secrets and removed the deployment document that contained hosting details.
+- Removed known hosting identifiers and personal commit email addresses from the branch history, and deleted nine old deployment runs and their logs. Existing clones and cached commits may still retain old history.
+- Added a pinned, checksum-verified Gitleaks scan for pushes and pull requests, with secret values redacted from findings.
+- Pinned the checkout action to a specific commit and disabled persisted Git credentials.
+- Excluded local environment files, private-key files, and Python cache files from Git.
+- Added automatic cPanel updates and deployment verification through HTTPS, with redirect blocking and redacted connection details in error messages.
+- Removed 17 unused images, including duplicate social graphics, obsolete timeline images, and layout mockups.
+- Established the `major.minor.patch.security` version format, updated deployment verification to check the full four-part version, and required synchronized README, timeline, and website versions for future updates.
 
 ## 1.3.0 — October 21, 2026
 

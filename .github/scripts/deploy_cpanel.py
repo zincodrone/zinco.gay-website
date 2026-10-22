@@ -119,7 +119,11 @@ def deploy(client, expected_commit, sleep=time.sleep):
 
 
 def verify_live(expected_commit, sleep=time.sleep):
-    version = re.search(r">(v[\d.]+)</a>", Path("index.html").read_text(encoding="utf-8")).group(1)
+    version_match = re.search(r">(v\d+\.\d+\.\d+\.\d+)</a>",
+                              Path("index.html").read_text(encoding="utf-8"))
+    if not version_match:
+        raise RuntimeError("The homepage footer must use major.minor.patch.security versioning.")
+    version = version_match.group(1)
     opener = build_opener(NoRedirect())
     for _ in range(12):
         try:
