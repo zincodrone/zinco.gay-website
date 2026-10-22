@@ -1,0 +1,12 @@
+# Local credentials and private configuration must not be committed.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+__pycache__/
+*.py[cod]

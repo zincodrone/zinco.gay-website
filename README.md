@@ -15,6 +15,10 @@ This is my first attempt to create my own website. Let's see how this goes.
 
 Pushes to `main` automatically update and deploy the website through the cPanel API. Connection details are stored in GitHub Actions secrets (`CPANEL_HOST`, `CPANEL_USERNAME`, `CPANEL_REPOSITORY_ROOT`, and `CPANEL_API_TOKEN`), not in source files. The workflow waits for cPanel to confirm the deployed commit and checks the live homepage version. View [deployment runs](https://github.com/zincodrone/zinco.gay-website/actions/workflows/deploy-cpanel.yml).
 
+## Repository security
+
+GitHub Actions scans pushes and pull requests for exposed secrets with a pinned, checksum-verified Gitleaks release. Scanner findings redact secret values. Local environment files and private-key files are excluded from Git by `.gitignore`; real credentials belong in GitHub Actions secrets. These checks reduce accidental exposure but do not guarantee that every security issue will be detected.
+
 # Changelog
 
 Versions use `major.minor.patch`: major for substantial redesigns or changes that break existing behavior, minor for new features, and patch for fixes or small updates. October 2026 marks the site's first major release, `1.0.0`.
