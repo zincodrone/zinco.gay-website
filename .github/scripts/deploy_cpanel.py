@@ -132,13 +132,17 @@ def verify_live(expected_commit, sleep=time.sleep):
 
 
 def main():
+    required = ("CPANEL_HOST", "CPANEL_USERNAME", "CPANEL_REPOSITORY_ROOT", "CPANEL_API_TOKEN")
+    missing = [name for name in required if not os.environ.get(name, "").strip()]
+    if missing:
+        raise RuntimeError("Add these GitHub Actions repository secrets: " + ", ".join(missing))
     token = os.environ.get("CPANEL_API_TOKEN", "").strip()
     if not token:
         raise RuntimeError("Add CPANEL_API_TOKEN under GitHub Settings → Secrets and variables → Actions.")
     if any(character.isspace() for character in token):
         raise RuntimeError("CPANEL_API_TOKEN contains whitespace. Save only the generated token value in GitHub, not its label or accompanying text.")
-    client = CPanel(os.environ["CPANEL_HOST"], os.environ["CPANEL_USERNAME"],
-                    token, os.environ["CPANEL_REPOSITORY_ROOT"])
+    client = CPanel(os.environ["CPANEL_HOST"].strip(), os.environ["CPANEL_USERNAME"].strip(),
+                    token, os.environ["CPANEL_REPOSITORY_ROOT"].strip())
     expected = os.environ["EXPECTED_COMMIT"]
     deploy(client, expected)
     verify_live(expected)
@@ -149,8 +153,9 @@ if __name__ == "__main__":
         main()
     except Exception as error:
         message = str(error)
-        token = os.environ.get("CPANEL_API_TOKEN")
-        if token:
-            message = message.replace(token, "[redacted]")
+        for name in ("CPANEL_API_TOKEN", "CPANEL_REPOSITORY_ROOT", "CPANEL_USERNAME", "CPANEL_HOST"):
+            value = os.environ.get(name, "").strip()
+            if value:
+                message = message.replace(value, "[redacted]")
         print(f"Deployment failed: {message}", file=sys.stderr)
         sys.exit(1)

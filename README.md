@@ -13,7 +13,7 @@ This is my first attempt to create my own website. Let's see how this goes.
 
 # Deployment
 
-Pushes to `main` automatically update and deploy the website through the cPanel API. The workflow waits for cPanel to confirm the deployed commit and checks the live homepage version. See [deployment setup and troubleshooting](DEPLOYMENT.md) or [deployment runs](https://github.com/zincodrone/zinco.gay-website/actions/workflows/deploy-cpanel.yml).
+Pushes to `main` automatically update and deploy the website through the cPanel API. Connection details are stored in GitHub Actions secrets (`CPANEL_HOST`, `CPANEL_USERNAME`, `CPANEL_REPOSITORY_ROOT`, and `CPANEL_API_TOKEN`), not in source files. The workflow waits for cPanel to confirm the deployed commit and checks the live homepage version. View [deployment runs](https://github.com/zincodrone/zinco.gay-website/actions/workflows/deploy-cpanel.yml).
 
 # Changelog
 

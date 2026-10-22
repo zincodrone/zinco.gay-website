@@ -25,9 +25,9 @@ jobs:
 
       - name: Update and deploy through cPanel
         env:
-          CPANEL_HOST: [redacted]
-          CPANEL_USERNAME: [redacted]
-          CPANEL_REPOSITORY_ROOT: [redacted]
+          CPANEL_HOST: ${{ secrets.CPANEL_HOST }}
+          CPANEL_USERNAME: ${{ secrets.CPANEL_USERNAME }}
+          CPANEL_REPOSITORY_ROOT: ${{ secrets.CPANEL_REPOSITORY_ROOT }}
           CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
           EXPECTED_COMMIT: ${{ github.sha }}
         run: python3 .github/scripts/deploy_cpanel.py
