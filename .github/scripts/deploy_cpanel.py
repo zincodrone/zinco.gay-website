@@ -71,8 +71,16 @@ def deploy(client, expected_commit, sleep=time.sleep):
         raise RuntimeError("cPanel's source repository does not match this website.")
 
     print("Updating the cPanel repository from origin/main…", flush=True)
-    client.call("VersionControl", "update", repository_root=client.root,
-                branch="main", source_repository=json.dumps({"remote_name": "origin"}))
+    for attempt in range(3):
+        try:
+            client.call("VersionControl", "update", repository_root=client.root,
+                        branch="main", source_repository=json.dumps({"remote_name": "origin"}))
+            break
+        except RuntimeError as error:
+            if attempt == 2 or not any(word in str(error).lower() for word in ("timeout", "timed out")):
+                raise
+            print("cPanel's Git update timed out; retrying the same fast-forward update…", flush=True)
+            sleep(10 * (attempt + 1))
     for _ in range(60):
         repository = client.repository()
         if not repository.get("tasks"):
