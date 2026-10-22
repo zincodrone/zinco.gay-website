@@ -34,11 +34,18 @@ class CPanel:
         })
         try:
             with self.opener.open(request, timeout=45) as response:
-                result = json.load(response)["result"]
+                payload = response.read()
+                content_type = response.headers.get("Content-Type", "unknown")
         except HTTPError as error:
             raise RuntimeError(f"cPanel API returned HTTP {error.code}.") from error
-        except (URLError, ValueError, KeyError) as error:
-            raise RuntimeError("Could not read the cPanel API response.") from error
+        except URLError as error:
+            raise RuntimeError(f"Could not connect to the cPanel API: {error.reason}") from error
+        try:
+            result = json.loads(payload)["result"]
+        except (ValueError, KeyError) as error:
+            if b"<html" in payload.lower() or "text/html" in content_type:
+                raise RuntimeError("cPanel returned a login/HTML page instead of API data. Verify that the token belongs to this username on this server and that the host permits API-token authentication.") from error
+            raise RuntimeError(f"cPanel returned an unexpected API response ({content_type}).") from error
         if result.get("status") != 1:
             raise RuntimeError(f"cPanel rejected {module}/{function}: {result.get('errors')}")
         return result.get("data")
@@ -114,9 +121,11 @@ def verify_live(expected_commit, sleep=time.sleep):
 
 
 def main():
-    token = os.environ.get("CPANEL_API_TOKEN", "")
+    token = os.environ.get("CPANEL_API_TOKEN", "").strip()
     if not token:
         raise RuntimeError("Add CPANEL_API_TOKEN under GitHub Settings → Secrets and variables → Actions.")
+    if any(character.isspace() for character in token):
+        raise RuntimeError("CPANEL_API_TOKEN contains whitespace. Save only the generated token value in GitHub, not its label or accompanying text.")
     client = CPanel(os.environ["CPANEL_HOST"], os.environ["CPANEL_USERNAME"],
                     token, os.environ["CPANEL_REPOSITORY_ROOT"])
     expected = os.environ["EXPECTED_COMMIT"]
