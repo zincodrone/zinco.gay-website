@@ -41,7 +41,10 @@ class CPanel:
         except URLError as error:
             raise RuntimeError(f"Could not connect to the cPanel API: {error.reason}") from error
         try:
-            result = json.loads(payload)["result"]
+            envelope = json.loads(payload)
+            result = envelope.get("result", envelope.get("cpanelresult", {}).get("result", envelope))
+            if not isinstance(result, dict) or "status" not in result:
+                raise ValueError("Missing API status")
         except (ValueError, KeyError) as error:
             if b"<html" in payload.lower() or "text/html" in content_type:
                 raise RuntimeError("cPanel returned a login/HTML page instead of API data. Verify that the token belongs to this username on this server and that the host permits API-token authentication.") from error
