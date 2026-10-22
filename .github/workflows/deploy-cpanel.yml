@@ -1,0 +1,33 @@
+name: Deploy website to cPanel
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cpanel-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out the website
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Update and deploy through cPanel
+        env:
+          CPANEL_HOST: [redacted]
+          CPANEL_USERNAME: [redacted]
+          CPANEL_REPOSITORY_ROOT: [redacted]
+          CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
+          EXPECTED_COMMIT: ${{ github.sha }}
+        run: python3 .github/scripts/deploy_cpanel.py

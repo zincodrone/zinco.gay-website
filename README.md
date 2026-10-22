@@ -11,6 +11,10 @@ This is my first attempt to create my own website. Let's see how this goes.
 
 - \[❓\] Activity Log — Place to log activities in my daily life, what I've been up to, and maybe linking to my blog (who knows?).
 
+# Deployment
+
+The automatic cPanel deployment workflow is prepared and awaiting its API token and first successful test. See [deployment setup and troubleshooting](DEPLOYMENT.md). Once verified, pushes to `main` will update and deploy the website without the manual cPanel steps.
+
 # Changelog
 
 Versions use `major.minor.patch`: major for substantial redesigns or changes that break existing behavior, minor for new features, and patch for fixes or small updates. October 2026 marks the site's first major release, `1.0.0`.
