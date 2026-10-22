@@ -13,7 +13,7 @@ This is my first attempt to create my own website. Let's see how this goes.
 
 # Deployment
 
-The automatic cPanel deployment workflow is prepared and awaiting its API token and first successful test. See [deployment setup and troubleshooting](DEPLOYMENT.md). Once verified, pushes to `main` will update and deploy the website without the manual cPanel steps.
+Pushes to `main` automatically update and deploy the website through the cPanel API. The workflow waits for cPanel to confirm the deployed commit and checks the live homepage version. See [deployment setup and troubleshooting](DEPLOYMENT.md) or [deployment runs](https://github.com/zincodrone/zinco.gay-website/actions/workflows/deploy-cpanel.yml).
 
 # Changelog
 
