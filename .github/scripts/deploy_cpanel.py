@@ -142,14 +142,21 @@ def verify_live(expected_commit, sleep=time.sleep):
             elif missing:
                 last_issue = "security headers did not match: " + ", ".join(missing)
             else:
-                directory = Request(f"https://zinco.gay/images/?deploy={expected_commit}", headers={"Cache-Control": "no-cache"})
-                try:
-                    with opener.open(directory, timeout=20):
-                        last_issue = "the images directory was still publicly browsable"
-                except HTTPError as error:
-                    if error.code not in (403, 404):
-                        raise
-                    print(f"Live homepage displays {version}; browser security headers and disabled directory listings are confirmed.", flush=True)
+                blocked = True
+                for path, issue in (("/images/", "the images directory was still publicly browsable"),
+                                    ("/README.md", "the website README was still publicly downloadable")):
+                    probe = Request(f"https://zinco.gay{path}?deploy={expected_commit}",
+                                    headers={"Cache-Control": "no-cache"})
+                    try:
+                        with opener.open(probe, timeout=20):
+                            last_issue = issue
+                            blocked = False
+                            break
+                    except HTTPError as error:
+                        if error.code not in (403, 404):
+                            raise
+                if blocked:
+                    print(f"Live homepage displays {version}; security headers, disabled directory listings, and blocked README access are confirmed.", flush=True)
                     return
         except (HTTPError, URLError):
             last_issue = "a live verification request failed"

@@ -27,6 +27,8 @@ The deployed `.htaccess` disables directory listings and sets a Content Security
 
 PHP-family requests are denied in the public website directory, including mixed-case names, double extensions, and extra path segments. This static site does not need PHP. This is an HTTP access restriction, not removal or account-wide disabling of PHP. Hosting-managed cPanel and Webmail routes can bypass the website directory rules and remain separate.
 
+Direct access to `README.md` is denied on the hosted website, including differently capitalized names, nested paths, and extra path segments. Deployment excludes the README, but that alone does not remove copies left by older deployments. The repository README remains public on GitHub. Deployment verification checks that the website README cannot be downloaded.
+
 When changing inline HTML scripts or styles, run `python .github/scripts/check_site_security.py --update`, review the generated policy, and test the site. The security workflow checks those hashes before allowing deployment. Existing fades, the GIF background, social choices, and redirects must continue working under the policy.
 
 ### Maintenance
@@ -61,7 +63,7 @@ Each new clone needs this setup; Git does not automatically enable tracked hooks
 
 # Changelog
 
-Current version: **1.3.0.5**.
+Current version: **1.3.0.6**.
 
 New releases use `major.minor.patch.security`: major for substantial redesigns or changes that break existing behavior, minor for new features, patch for ordinary fixes or small maintenance updates, and security for security updates and related cleanup. Increment the applicable number and reset every number to its right to zero. After `1.3.0.1`, another security update would be `1.3.0.2`, an ordinary patch would be `1.3.1.0`, a new feature would be `1.4.0.0`, and a major release would be `2.0.0.0`. When changes span categories, use the highest applicable component.
 
@@ -73,7 +75,13 @@ Every update must update this README and the website version together, including
 
 Follow the arrows from the earliest release to the latest, snaking across each row. Times are in America/Chicago and reflect when each version was committed, not when it was deployed to the live website. The 2024 entries retain the months recorded in the original changelog; exact release days were not recorded there. Spacing between releases is not to scale.
 
-![Snaking release timeline from version 0.1.0 through 1.3.0.5](images/changelog-timeline-snake.png)
+![Snaking release timeline from version 0.1.0 through 1.3.0.6](images/changelog-timeline-snake.png)
+
+## 1.3.0.6 — October 23, 2026 (security update)
+
+- Denied website access to README.md, including legacy hosted copies, case variations, nested paths, and extra path segments.
+- Added a live README access check to deployment verification so a publicly downloadable copy fails verification.
+- Kept the GitHub README available and synchronized all page versions, asset cache versions, and the release timeline.
 
 ## 1.3.0.5 — October 23, 2026 (security update)
 

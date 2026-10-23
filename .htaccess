@@ -17,7 +17,15 @@ DirectoryIndex index.html
     Require all denied
 </FilesMatch>
 
+# Keep repository READMEs private on the hosted website, including old copies.
+<FilesMatch "(?i)^README\.md$">
+    Require all denied
+</FilesMatch>
+
 RewriteEngine On
+
+# Also deny README URLs with extra path segments or different capitalization.
+RewriteRule "(^|/)README\.md(/|$)" - [F,L,NC]
 
 # Reject PHP-shaped URLs before clean-URL rewriting, even for missing files.
 RewriteRule "(^|/)[^/]*\.(php[0-9]*|phtml|pht|phar|phps)([./]|$)" - [F,L,NC]
