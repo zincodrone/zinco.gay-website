@@ -11,7 +11,16 @@ DirectoryIndex index.html
     Header always set Content-Security-Policy "default-src 'none'; script-src 'self' 'sha256-Y5wHRvierZQkUomR/zCWqFXJCSr8g3D3wPawoFVXMYY=' 'sha256-duXoKsdAdUQEIWwmPR+eiqycu/QBd/6ftJV/hTqsIwA=' 'sha256-rs5NPoe3WX7hBoNapIy9tZogj9anpH+68XC6JwhEjRY=' 'sha256-u6MDeBd39YaJGsFGjzKrMWLx2wwoS3wMVTdVm5OTV5o='; script-src-attr 'none'; style-src 'self' 'sha256-cTcKhdeQE2fQ7Jh1cS9jsdh//F9Deqjd2P35J8QppC8=' 'sha256-hNso8PBjDNBoohRxO3XbmAhWA6BqAchk3iHFCFaFfPU='; style-src-attr 'none'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
 </IfModule>
 
+# Block PHP-family files, including mixed-case and double-extension names.
+# This denies web access; it does not disable the hosting account's PHP runtime.
+<FilesMatch "(?i)\.(?:php[0-9]*|phtml|pht|phar|phps)(?:\.|$)">
+    Require all denied
+</FilesMatch>
+
 RewriteEngine On
+
+# Reject PHP-shaped URLs before clean-URL rewriting, even for missing files.
+RewriteRule "(^|/)[^/]*\.(php[0-9]*|phtml|pht|phar|phps)([./]|$)" - [F,L,NC]
 
 # Redirect explicitly requested index files to their directory URL.
 RewriteCond %{THE_REQUEST} \s/+[^?\s]*index\.html(?:[?\s]) [NC]

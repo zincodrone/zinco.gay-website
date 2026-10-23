@@ -25,6 +25,8 @@ GitHub's server-side secret scanning and push protection were confirmed enabled 
 
 The deployed `.htaccess` disables directory listings and sets a Content Security Policy that permits local assets and only the exact inline scripts and styles used by the site. It also blocks framing, disables MIME sniffing, limits referrer information, disables unused device permissions, and enables HTTPS-only browsing for one week after a secure visit. The HTTPS policy applies to this hostname only; it does not include subdomains or preload registration.
 
+PHP-family requests are denied in the public website directory, including mixed-case names, double extensions, and extra path segments. This static site does not need PHP. This is an HTTP access restriction, not removal or account-wide disabling of PHP. Hosting-managed cPanel and Webmail routes can bypass the website directory rules and remain separate.
+
 When changing inline HTML scripts or styles, run `python .github/scripts/check_site_security.py --update`, review the generated policy, and test the site. The security workflow checks those hashes before allowing deployment. Existing fades, the GIF background, social choices, and redirects must continue working under the policy.
 
 ### Maintenance
@@ -59,7 +61,7 @@ Each new clone needs this setup; Git does not automatically enable tracked hooks
 
 # Changelog
 
-Current version: **1.3.0.4**.
+Current version: **1.3.0.5**.
 
 New releases use `major.minor.patch.security`: major for substantial redesigns or changes that break existing behavior, minor for new features, patch for ordinary fixes or small maintenance updates, and security for security updates and related cleanup. Increment the applicable number and reset every number to its right to zero. After `1.3.0.1`, another security update would be `1.3.0.2`, an ordinary patch would be `1.3.1.0`, a new feature would be `1.4.0.0`, and a major release would be `2.0.0.0`. When changes span categories, use the highest applicable component.
 
@@ -71,7 +73,14 @@ Every update must update this README and the website version together, including
 
 Follow the arrows from the earliest release to the latest, snaking across each row. Times are in America/Chicago and reflect when each version was committed, not when it was deployed to the live website. The 2024 entries retain the months recorded in the original changelog; exact release days were not recorded there. Spacing between releases is not to scale.
 
-![Snaking release timeline from version 0.1.0 through 1.3.0.4](images/changelog-timeline-snake.png)
+![Snaking release timeline from version 0.1.0 through 1.3.0.5](images/changelog-timeline-snake.png)
+
+## 1.3.0.5 — October 23, 2026 (security update)
+
+- Blocked web access to PHP-family files in the website directory, including mixed-case and double-extension filenames.
+- Rejected PHP-shaped URLs before clean-URL rewriting, including missing files and extra path segments.
+- Documented that the restriction applies to the static website and does not disable the hosting PHP runtime or cPanel/Webmail services.
+- Updated all page versions, stylesheet/script cache versions, and the release timeline together.
 
 ## 1.3.0.4 — October 22, 2026 (security update)
 
