@@ -10,3 +10,9 @@ id_rsa*
 id_ed25519*
 __pycache__/
 *.py[cod]
+# Recovery archives belong outside this checkout and public_html.
+*.bundle
+/backups/
+/recovery-backups/
+/website-recovery-backups/
+backup-*.tar.gz

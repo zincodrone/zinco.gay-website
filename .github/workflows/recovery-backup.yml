@@ -1,0 +1,30 @@
+name: Create private hosting backup
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cpanel-private-backup
+  cancel-in-progress: false
+
+jobs:
+  security:
+    uses: ./.github/workflows/security-scan.yml
+  backup:
+    needs: security
+    if: github.ref == 'refs/heads/main' && needs.security.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Request and verify a backup outside the public website directory
+        env:
+          CPANEL_HOST: ${{ secrets.CPANEL_HOST }}
+          CPANEL_USERNAME: ${{ secrets.CPANEL_USERNAME }}
+          CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
+        run: python3 .github/scripts/request_hosting_backup.py

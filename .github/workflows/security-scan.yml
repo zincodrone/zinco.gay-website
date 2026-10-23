@@ -20,6 +20,8 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+      - name: Check browser security configuration
+        run: python3 .github/scripts/check_site_security.py
       - name: Install pinned, checksum-verified BetterLeaks
         shell: bash
         run: |

@@ -21,6 +21,30 @@ GitHub Actions scans the full fetched Git history on pushes, pull requests, and 
 
 GitHub's server-side secret scanning and push protection were confirmed enabled for this repository on October 22, 2026. They block supported secret types before upload, including pushes from other machines and GitHub-based edits. Coverage depends on GitHub's supported patterns and permitted bypasses.
 
+### Browser and hosting protections
+
+The deployed `.htaccess` disables directory listings and sets a Content Security Policy that permits local assets and only the exact inline scripts and styles used by the site. It also blocks framing, disables MIME sniffing, limits referrer information, disables unused device permissions, and enables HTTPS-only browsing for one week after a secure visit. The HTTPS policy applies to this hostname only; it does not include subdomains or preload registration.
+
+When changing inline HTML scripts or styles, run `python .github/scripts/check_site_security.py --update`, review the generated policy, and test the site. The security workflow checks those hashes before allowing deployment. Existing fades, the GIF background, social choices, and redirects must continue working under the policy.
+
+### Maintenance
+
+Dependabot vulnerability alerts and security-update proposals are enabled for dependencies GitHub can identify. The version-update configuration checks GitHub Actions monthly and opens grouped proposals, with at most three open update pull requests. It does not automatically merge or publish them. SHA-pinned Actions and separately downloaded tools still need version maintenance; enabling alerts is not a guarantee of complete coverage. Review proposals and keep the version, README, and timeline aligned before release. BetterLeaks is a separately pinned binary: review its [stable releases](https://github.com/betterleaks/betterleaks/releases/latest) during monthly maintenance and update the workflow, installer checksums, and documentation together when upgrading.
+
+### Recovery backups
+
+Before substantial changes, run:
+
+```sh
+python .github/scripts/create_recovery_backup.py
+```
+
+The default destination is a `website-recovery-backups` folder beside this checkout, outside the repository and `public_html`. Each dated backup contains a verified Git bundle of committed reachable history, ZIPs of the current public website and deployment configuration, observed root/`www` DNS records, SHA-256 checksums, and restoration notes. The manifest identifies the committed revision and whether working files include uncommitted changes. The script refuses destinations inside the repository or `public_html`.
+
+The DNS snapshot is not a complete PremiumDNS zone export. Save a complete export from Namecheap separately, along with a full private hosting-account backup. After publishing the workflow, **Actions → Create private hosting backup → Run workflow** requests a full cPanel backup to the account's private home directory and waits for cPanel to report completion. It runs only on demand and never uploads the account backup as a GitHub artifact. This account-wide backup can include mail, databases, and other hosted files. Download it through cPanel to a private encrypted backup location; full account restoration can require the hosting provider. The status check uses cPanel's older read-only API 2 endpoint because the UAPI backup list does not distinguish pending and completed manual backups; if unavailable, use cPanel's Backup Wizard.
+
+Local recovery archives are not encrypted by this script and do not export credentials or full account settings. Keep copies on a private encrypted drive, never under `public_html` or in Git. Restore the repository into a new folder with `git clone repository.bundle restored-website`, verify archive hashes against `manifest.json`, reinstall the local hook, and recreate deployment secrets from your password manager before publishing. Test recovery into a separate folder before using a backup to replace the live site.
+
 ### Before pushing from a local checkout
 
 With Python 3 installed, run this once after cloning, from the repository folder:
@@ -35,7 +59,7 @@ Each new clone needs this setup; Git does not automatically enable tracked hooks
 
 # Changelog
 
-Current version: **1.3.0.3**.
+Current version: **1.3.0.4**.
 
 New releases use `major.minor.patch.security`: major for substantial redesigns or changes that break existing behavior, minor for new features, patch for ordinary fixes or small maintenance updates, and security for security updates and related cleanup. Increment the applicable number and reset every number to its right to zero. After `1.3.0.1`, another security update would be `1.3.0.2`, an ordinary patch would be `1.3.1.0`, a new feature would be `1.4.0.0`, and a major release would be `2.0.0.0`. When changes span categories, use the highest applicable component.
 
@@ -47,7 +71,15 @@ Every update must update this README and the website version together, including
 
 Follow the arrows from the earliest release to the latest, snaking across each row. Times are in America/Chicago and reflect when each version was committed, not when it was deployed to the live website. The 2024 entries retain the months recorded in the original changelog; exact release days were not recorded there. Spacing between releases is not to scale.
 
-![Snaking release timeline from version 0.1.0 through 1.3.0.3](images/changelog-timeline-snake.png)
+![Snaking release timeline from version 0.1.0 through 1.3.0.4](images/changelog-timeline-snake.png)
+
+## 1.3.0.4 — October 22, 2026 (security update)
+
+- Added restrictive browser security headers, with exact inline-code hashes to preserve page animations and social-link behavior.
+- Disabled directory listings, added a check to keep the Content Security Policy synchronized with page code, and made deployment verification check the live headers and directory protection.
+- Enabled Dependabot vulnerability alerts and security-update proposals, configured monthly proposals for GitHub Actions, and documented the separate BetterLeaks update process.
+- Added verified recovery archives outside the repository and web root, including website files, deployment configuration, an observed DNS snapshot, and restoration notes.
+- Added an on-demand, security-gated workflow for private cPanel account backups, without publishing account archives or connection details.
 
 ## 1.3.0.3 — October 22, 2026 (security update)
 

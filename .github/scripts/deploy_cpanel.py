@@ -124,19 +124,37 @@ def verify_live(expected_commit, sleep=time.sleep):
     if not version_match:
         raise RuntimeError("The homepage footer must use major.minor.patch.security versioning.")
     version = version_match.group(1)
+    expected_headers = dict(re.findall(r'^\s*Header always set ([\w-]+) "([^"\n]+)"',
+                                      Path(".htaccess").read_text(encoding="utf-8"), re.MULTILINE))
+    if "Content-Security-Policy" not in expected_headers:
+        raise RuntimeError("The browser security headers are missing from .htaccess.")
     opener = build_opener(NoRedirect())
+    last_issue = "the expected live version was not visible"
     for _ in range(12):
         try:
             request = Request(f"https://zinco.gay/?deploy={expected_commit}", headers={"Cache-Control": "no-cache"})
             with opener.open(request, timeout=20) as response:
                 html = response.read().decode("utf-8")
-            if f">{version}</a>" in html:
-                print(f"Live homepage is reachable and displays {version}.", flush=True)
-                return
+                missing = [name for name, value in expected_headers.items()
+                           if response.headers.get(name, "").strip() != value]
+            if f">{version}</a>" not in html:
+                last_issue = "the expected live version was not visible"
+            elif missing:
+                last_issue = "security headers did not match: " + ", ".join(missing)
+            else:
+                directory = Request(f"https://zinco.gay/images/?deploy={expected_commit}", headers={"Cache-Control": "no-cache"})
+                try:
+                    with opener.open(directory, timeout=20):
+                        last_issue = "the images directory was still publicly browsable"
+                except HTTPError as error:
+                    if error.code not in (403, 404):
+                        raise
+                    print(f"Live homepage displays {version}; browser security headers and disabled directory listings are confirmed.", flush=True)
+                    return
         except (HTTPError, URLError):
-            pass
+            last_issue = "a live verification request failed"
         sleep(3)
-    raise RuntimeError("cPanel reported success, but the expected live version could not be verified.")
+    raise RuntimeError("cPanel reported success, but live verification failed: " + last_issue + ".")
 
 
 def main():

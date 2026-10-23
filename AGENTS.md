@@ -32,3 +32,8 @@ Do this automatically; do not wait for the user to request it again.
   Resolve findings or repair the scanner first.
 - Keep automatic and manual deployments dependent on a successful BetterLeaks scan
   of the same workflow commit. Do not pass deployment secrets to the scan job.
+- After changing inline HTML scripts or styles, regenerate the CSP hashes with
+  `python .github/scripts/check_site_security.py --update`, review the policy,
+  and verify animations and social-link behavior in a browser.
+- Keep recovery archives outside the repository and `public_html`. Never upload
+  full account backups, DNS exports, or account settings as public artifacts.
