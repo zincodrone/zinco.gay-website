@@ -13,15 +13,29 @@ This is my first attempt to create my own website. Let's see how this goes.
 
 # Deployment
 
-Pushes to `main` automatically update and deploy the website through the cPanel API. Connection details are stored in GitHub Actions secrets (`CPANEL_HOST`, `CPANEL_USERNAME`, `CPANEL_REPOSITORY_ROOT`, and `CPANEL_API_TOKEN`), not in source files. The workflow waits for cPanel to confirm the deployed commit and checks the live homepage version. View [deployment runs](https://github.com/zincodrone/zinco.gay-website/actions/workflows/deploy-cpanel.yml).
+Pushes to `main` first run BetterLeaks, then update and deploy the website through the cPanel API only if the scan succeeds. Manually requested deployments use the same prerequisite. A failed, cancelled, or unavailable scan prevents deployment. Connection details are stored in GitHub Actions secrets (`CPANEL_HOST`, `CPANEL_USERNAME`, `CPANEL_REPOSITORY_ROOT`, and `CPANEL_API_TOKEN`), not in source files, and are provided only to the deployment job. The workflow waits for cPanel to confirm the deployed commit and checks the live homepage version. View [deployment runs](https://github.com/zincodrone/zinco.gay-website/actions/workflows/deploy-cpanel.yml).
 
 ## Repository security
 
 GitHub Actions scans the full fetched Git history on pushes, pull requests, and manual runs using [BetterLeaks v1.9.0](https://github.com/betterleaks/betterleaks/releases/tag/v1.9.0). The release archive is pinned and verified against its SHA-256 checksum before execution. Secret values are fully redacted, and live credential validation is explicitly disabled. The scan uses read-only repository permissions and does not retain checkout credentials. Local environment files and private-key files are excluded from Git by `.gitignore`; real credentials belong in GitHub Actions secrets. These checks reduce accidental exposure but do not guarantee that every security issue will be detected.
 
+GitHub's server-side secret scanning and push protection were confirmed enabled for this repository on October 22, 2026. They block supported secret types before upload, including pushes from other machines and GitHub-based edits. Coverage depends on GitHub's supported patterns and permitted bypasses.
+
+### Before pushing from a local checkout
+
+With Python 3 installed, run this once after cloning, from the repository folder:
+
+```sh
+python .github/scripts/install_push_protection.py
+```
+
+This verifies and installs BetterLeaks under Git's local metadata directory, then enables the tracked pre-push hook for that checkout. Every ordinary push scans committed history, including the outgoing commits, before uploading. A detected secret, missing scanner, or scan error blocks the push. Deleting a remote branch does not require a scan because it uploads no commits. The installer preserves existing custom hook configurations by stopping instead of overwriting them. Use `python3` if that is your system's Python 3 command.
+
+Each new clone needs this setup; Git does not automatically enable tracked hooks. Local hooks can be disabled, and neither local nor server-side scanning can detect every secret. Keep real credentials out of tracked files even when all checks pass.
+
 # Changelog
 
-Current version: **1.3.0.2**.
+Current version: **1.3.0.3**.
 
 New releases use `major.minor.patch.security`: major for substantial redesigns or changes that break existing behavior, minor for new features, patch for ordinary fixes or small maintenance updates, and security for security updates and related cleanup. Increment the applicable number and reset every number to its right to zero. After `1.3.0.1`, another security update would be `1.3.0.2`, an ordinary patch would be `1.3.1.0`, a new feature would be `1.4.0.0`, and a major release would be `2.0.0.0`. When changes span categories, use the highest applicable component.
 
@@ -33,7 +47,15 @@ Every update must update this README and the website version together, including
 
 Follow the arrows from the earliest release to the latest, snaking across each row. Times are in America/Chicago and reflect when each version was committed, not when it was deployed to the live website. The 2024 entries retain the months recorded in the original changelog; exact release days were not recorded there. Spacing between releases is not to scale.
 
-![Snaking release timeline from version 0.1.0 through 1.3.0.2](images/changelog-timeline-snake.png)
+![Snaking release timeline from version 0.1.0 through 1.3.0.3](images/changelog-timeline-snake.png)
+
+## 1.3.0.3 — October 22, 2026 (security update)
+
+- Made automatic and manual cPanel deployments depend on a successful BetterLeaks scan of the same workflow commit, without passing deployment credentials to the scanner.
+- Reused the security workflow for deployment checks while retaining separate pull-request, other-branch, tag, and manual scans.
+- Added a local pre-push hook that checks committed history before uploading and blocks pushes if the scanner finds a secret, is missing, or fails.
+- Added a checksum-verified BetterLeaks installer for Windows, macOS, and Linux, with per-checkout hook configuration and protection for existing custom hooks.
+- Confirmed GitHub's server-side push protection is enabled and documented the setup required for new clones and the remaining detection and bypass limits.
 
 ## 1.3.0.2 — October 22, 2026 (security update)
 

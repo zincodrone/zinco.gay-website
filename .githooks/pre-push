@@ -1,0 +1,13 @@
+#!/bin/sh
+set -eu
+
+if command -v py >/dev/null 2>&1; then
+    exec py -3 .github/scripts/pre_push.py
+elif command -v python3 >/dev/null 2>&1; then
+    exec python3 .github/scripts/pre_push.py
+elif command -v python >/dev/null 2>&1; then
+    exec python .github/scripts/pre_push.py
+fi
+
+echo "Push blocked: install Python 3 to run the BetterLeaks pre-push check." >&2
+exit 1

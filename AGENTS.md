@@ -22,3 +22,13 @@ Do this automatically; do not wait for the user to request it again.
   version, the README documents it, and the release timeline includes it.
 - Treat these release updates as part of the requested work, not an optional follow-up.
   Follow any explicit instructions from the user about when to commit or push.
+
+# Secret protection
+
+- Run `python .github/scripts/install_push_protection.py` once in every new checkout
+  before pushing, using Python 3. This installs the checksum-verified scanner outside
+  tracked files and enables the repository's local pre-push hook.
+- Do not bypass a failed or unavailable pre-push scan, including through an API push.
+  Resolve findings or repair the scanner first.
+- Keep automatic and manual deployments dependent on a successful BetterLeaks scan
+  of the same workflow commit. Do not pass deployment secrets to the scan job.

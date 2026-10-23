@@ -13,8 +13,13 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  security:
+    name: BetterLeaks before deployment
+    uses: ./.github/workflows/security-scan.yml
+
   deploy:
-    if: github.ref == 'refs/heads/main'
+    needs: security
+    if: github.ref == 'refs/heads/main' && needs.security.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
