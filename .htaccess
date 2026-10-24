@@ -8,7 +8,7 @@ DirectoryIndex index.html
     Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
     Header always set Strict-Transport-Security "max-age=604800"
     # Generated from the site's inline blocks by check_site_security.py --update.
-    Header always set Content-Security-Policy "default-src 'none'; script-src 'self' 'sha256-Y5wHRvierZQkUomR/zCWqFXJCSr8g3D3wPawoFVXMYY=' 'sha256-duXoKsdAdUQEIWwmPR+eiqycu/QBd/6ftJV/hTqsIwA=' 'sha256-rs5NPoe3WX7hBoNapIy9tZogj9anpH+68XC6JwhEjRY=' 'sha256-u6MDeBd39YaJGsFGjzKrMWLx2wwoS3wMVTdVm5OTV5o='; script-src-attr 'none'; style-src 'self' 'sha256-cTcKhdeQE2fQ7Jh1cS9jsdh//F9Deqjd2P35J8QppC8=' 'sha256-hNso8PBjDNBoohRxO3XbmAhWA6BqAchk3iHFCFaFfPU='; style-src-attr 'none'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+    Header always set Content-Security-Policy "default-src 'none'; script-src 'self' https://static.cloudflareinsights.com/beacon.min.js 'sha256-Y5wHRvierZQkUomR/zCWqFXJCSr8g3D3wPawoFVXMYY=' 'sha256-duXoKsdAdUQEIWwmPR+eiqycu/QBd/6ftJV/hTqsIwA=' 'sha256-rs5NPoe3WX7hBoNapIy9tZogj9anpH+68XC6JwhEjRY=' 'sha256-u6MDeBd39YaJGsFGjzKrMWLx2wwoS3wMVTdVm5OTV5o='; script-src-attr 'none'; style-src 'self' 'sha256-cTcKhdeQE2fQ7Jh1cS9jsdh//F9Deqjd2P35J8QppC8=' 'sha256-hNso8PBjDNBoohRxO3XbmAhWA6BqAchk3iHFCFaFfPU='; style-src-attr 'none'; img-src 'self' data:; font-src 'self'; connect-src https://cloudflareinsights.com/cdn-cgi/rum; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
 </IfModule>
 
 # Block PHP-family files, including mixed-case and double-extension names.

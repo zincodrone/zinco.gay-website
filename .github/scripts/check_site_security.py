@@ -25,11 +25,11 @@ def inline_hashes(root, tag):
 def content_security_policy(root):
     return "; ".join([
         "default-src 'none'",
-        "script-src 'self' " + " ".join(inline_hashes(root, "script")),
+        "script-src 'self' https://static.cloudflareinsights.com/beacon.min.js " + " ".join(inline_hashes(root, "script")),
         "script-src-attr 'none'",
         "style-src 'self' " + " ".join(inline_hashes(root, "style")),
         "style-src-attr 'none'",
-        "img-src 'self' data:", "font-src 'self'", "connect-src 'none'",
+        "img-src 'self' data:", "font-src 'self'", "connect-src https://cloudflareinsights.com/cdn-cgi/rum",
         "object-src 'none'", "base-uri 'none'", "form-action 'none'",
         "frame-ancestors 'none'",
     ])

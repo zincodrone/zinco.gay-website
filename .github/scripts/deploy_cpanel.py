@@ -2,7 +2,7 @@
 
 import json
 import os
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import re
 import sys
 import time
@@ -30,9 +30,14 @@ class CPanel:
         self.root = root
         self.opener = build_opener(NoRedirect())
 
-    def call(self, module, function, **params):
-        url = f"{self.base}/{module}/{function}?{urlencode(params)}"
-        request = Request(url, headers={
+    def call(self, module, function, _method="GET", **params):
+        url = f"{self.base}/{module}/{function}"
+        data = None
+        if _method == "POST":
+            data = urlencode(params).encode("utf-8")
+        else:
+            url += "?" + urlencode(params)
+        request = Request(url, data=data, headers={
             "Authorization": self.authorization,
             "Accept": "application/json",
         })
@@ -166,8 +171,55 @@ def verify_live(expected_commit, sleep=time.sleep):
     raise RuntimeError("cPanel reported success, but live verification failed: " + last_issue + ".")
 
 
+ANALYTICS_MARKER = "<!-- CLOUDFLARE_WEB_ANALYTICS -->"
+PUBLIC_PAGES = ("index.html", "socials.html", "redirect.html", "blog/index.html", "blog/welcome.html")
+
+
+def analytics_pages(identifier):
+    """Render production-only analytics without storing its identifier in Git."""
+    if not re.fullmatch(r"[a-f0-9]{32}", identifier):
+        raise RuntimeError("CLOUDFLARE_WEB_ANALYTICS_TOKEN must be the 32-character site identifier.")
+    snippet = ('<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" '
+               "data-cf-beacon='" + json.dumps({"token": identifier, "spa": False}, separators=(",", ":"))
+               + "'></script>")
+    pages = {}
+    for page in PUBLIC_PAGES:
+        html = Path(page).read_text(encoding="utf-8")
+        if html.count(ANALYTICS_MARKER) != 1 or "data-cf-beacon" in html:
+            raise RuntimeError("Each public HTML template must have exactly one inactive analytics marker.")
+        pages[page] = html.replace(ANALYTICS_MARKER, snippet)
+    return pages
+
+
+def install_analytics(client, pages):
+    domain = client.call("DomainInfo", "single_domain_data", domain="zinco.gay") or {}
+    root = PurePosixPath(domain.get("documentroot", ""))
+    if not root.is_absolute() or root.name != "public_html" or ".." in root.parts:
+        raise RuntimeError("cPanel did not return the expected public website directory.")
+    for page, html in pages.items():
+        target = root / page
+        result = client.call("Fileman", "save_file_content", _method="POST",
+                             dir=str(target.parent), file=target.name, content=html,
+                             from_charset="UTF-8", to_charset="UTF-8", fallback=0) or {}
+        if result.get("path") != str(target):
+            raise RuntimeError("cPanel did not confirm the expected analytics page path.")
+    print("Production analytics installed on all five public pages.", flush=True)
+
+
+def verify_analytics(identifier):
+    opener = build_opener(NoRedirect())
+    for path in ("/", "/socials", "/redirect", "/blog/", "/blog/welcome"):
+        with opener.open(Request("https://zinco.gay" + path,
+                                 headers={"Cache-Control": "no-cache"}), timeout=20) as response:
+            html = response.read().decode("utf-8")
+        if (html.count("data-cf-beacon=") != 1 or identifier not in html
+                or ANALYTICS_MARKER in html):
+            raise RuntimeError("A live page did not contain the expected production analytics beacon.")
+    print("Production analytics verified; identifiers were not printed.", flush=True)
+
+
 def main():
-    required = ("CPANEL_HOST", "CPANEL_USERNAME", "CPANEL_REPOSITORY_ROOT", "CPANEL_API_TOKEN")
+    required = ("CPANEL_HOST", "CPANEL_USERNAME", "CPANEL_REPOSITORY_ROOT", "CPANEL_API_TOKEN", "CLOUDFLARE_WEB_ANALYTICS_TOKEN")
     missing = [name for name in required if not os.environ.get(name, "").strip()]
     if missing:
         raise RuntimeError("Add these GitHub Actions repository secrets: " + ", ".join(missing))
@@ -178,9 +230,13 @@ def main():
         raise RuntimeError("CPANEL_API_TOKEN contains whitespace. Save only the generated token value in GitHub, not its label or accompanying text.")
     client = CPanel(os.environ["CPANEL_HOST"].strip(), os.environ["CPANEL_USERNAME"].strip(),
                     token, os.environ["CPANEL_REPOSITORY_ROOT"].strip())
+    identifier = os.environ["CLOUDFLARE_WEB_ANALYTICS_TOKEN"].strip()
+    pages = analytics_pages(identifier)
     expected = os.environ["EXPECTED_COMMIT"]
     deploy(client, expected)
+    install_analytics(client, pages)
     verify_live(expected)
+    verify_analytics(identifier)
 
 
 if __name__ == "__main__":
@@ -188,7 +244,7 @@ if __name__ == "__main__":
         main()
     except Exception as error:
         message = str(error)
-        for name in ("CPANEL_API_TOKEN", "CPANEL_REPOSITORY_ROOT", "CPANEL_USERNAME", "CPANEL_HOST"):
+        for name in ("CPANEL_API_TOKEN", "CPANEL_REPOSITORY_ROOT", "CPANEL_USERNAME", "CPANEL_HOST", "CLOUDFLARE_WEB_ANALYTICS_TOKEN"):
             value = os.environ.get(name, "").strip()
             if value:
                 message = message.replace(value, "[redacted]")
