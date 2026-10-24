@@ -22,7 +22,17 @@ DirectoryIndex index.html
     Require all denied
 </FilesMatch>
 
+# Block diagnostic logs even if hosting tools recreate them.
+<FilesMatch "(?i)(?:\.log$|^error_log$)">
+    Require all denied
+</FilesMatch>
+
 RewriteEngine On
+
+# Keep repository metadata and hosting-helper logs out of public responses.
+RewriteRule "(^|/)\.(git|github|githooks|svn|hg)(/|$)" - [F,L,NC]
+RewriteRule "(^|/)\.ssl-manager/logs(/|$)" - [F,L,NC]
+RewriteRule "(^|/)([^/]+\.log|error_log)(/|$)" - [F,L,NC]
 
 # Also deny README URLs with extra path segments or different capitalization.
 RewriteRule "(^|/)README\.md(/|$)" - [F,L,NC]

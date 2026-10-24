@@ -144,7 +144,9 @@ def verify_live(expected_commit, sleep=time.sleep):
             else:
                 blocked = True
                 for path, issue in (("/images/", "the images directory was still publicly browsable"),
-                                    ("/README.md", "the website README was still publicly downloadable")):
+                                    ("/README.md", "the website README was still publicly downloadable"),
+                                    ("/.git/HEAD", "repository metadata was still publicly downloadable"),
+                                    ("/.ssl-manager/logs/debug.log", "the SSL helper log was still publicly downloadable")):
                     probe = Request(f"https://zinco.gay{path}?deploy={expected_commit}",
                                     headers={"Cache-Control": "no-cache"})
                     try:
@@ -156,7 +158,7 @@ def verify_live(expected_commit, sleep=time.sleep):
                         if error.code not in (403, 404):
                             raise
                 if blocked:
-                    print(f"Live homepage displays {version}; security headers, disabled directory listings, and blocked README access are confirmed.", flush=True)
+                    print(f"Live homepage displays {version}; security headers, disabled directory listings, and blocked documentation, metadata, and helper logs are confirmed.", flush=True)
                     return
         except (HTTPError, URLError):
             last_issue = "a live verification request failed"

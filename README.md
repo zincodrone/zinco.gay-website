@@ -29,6 +29,8 @@ PHP-family requests are denied in the public website directory, including mixed-
 
 Direct access to `README.md` is denied on the hosted website, including differently capitalized names, nested paths, and extra path segments. Deployment excludes the README, but that alone does not remove copies left by older deployments. The repository README remains public on GitHub. Deployment verification checks that the website README cannot be downloaded.
 
+Diagnostic `.log` files, `error_log`, repository metadata directories, and the hosting SSL helper log directory are denied over HTTP. Certificate-validation and SSL status files remain available for hosting automation. Old web-root Git metadata, the stale README and error log, and 17 obsolete graphics were moved to an owner-only private recovery folder outside `public_html`; no files were permanently deleted. Current deployment uses a separate private checkout.
+
 When changing inline HTML scripts or styles, run `python .github/scripts/check_site_security.py --update`, review the generated policy, and test the site. The security workflow checks those hashes before allowing deployment. Existing fades, the GIF background, social choices, and redirects must continue working under the policy.
 
 ### Maintenance
@@ -63,7 +65,7 @@ Each new clone needs this setup; Git does not automatically enable tracked hooks
 
 # Changelog
 
-Current version: **1.3.0.6**.
+Current version: **1.3.0.7**.
 
 New releases use `major.minor.patch.security`: major for substantial redesigns or changes that break existing behavior, minor for new features, patch for ordinary fixes or small maintenance updates, and security for security updates and related cleanup. Increment the applicable number and reset every number to its right to zero. After `1.3.0.1`, another security update would be `1.3.0.2`, an ordinary patch would be `1.3.1.0`, a new feature would be `1.4.0.0`, and a major release would be `2.0.0.0`. When changes span categories, use the highest applicable component.
 
@@ -75,7 +77,14 @@ Every update must update this README and the website version together, including
 
 Follow the arrows from the earliest release to the latest, snaking across each row. Times are in America/Chicago and reflect when each version was committed, not when it was deployed to the live website. The 2024 entries retain the months recorded in the original changelog; exact release days were not recorded there. Spacing between releases is not to scale.
 
-![Snaking release timeline from version 0.1.0 through 1.3.0.6](images/changelog-timeline-snake.png)
+![Snaking release timeline from version 0.1.0 through 1.3.0.7](images/changelog-timeline-snake.png)
+
+## 1.3.0.7 — October 23, 2026 (security update)
+
+- Moved obsolete web-root Git metadata, stale documentation/log files, and 17 unused graphics into private, owner-only recovery storage outside the website directory.
+- Blocked public diagnostic logs, the SSL helper log directory, and repository metadata paths while preserving certificate-validation files.
+- Extended deployment verification to reject publicly accessible Git metadata or SSL helper logs.
+- Updated all page versions, versioned asset URLs, and the release timeline together.
 
 ## 1.3.0.6 — October 23, 2026 (security update)
 
